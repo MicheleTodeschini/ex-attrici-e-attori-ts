@@ -80,3 +80,23 @@ async function getAllActresses(): Promise<Actress[]>{
     return []
     }
 }
+
+async function getActresses(id: number[]):Promise < (Actress | null)[]> {
+    try {
+        const promises = id.map(id => getActress(id))
+        const attrici = await Promise.all(promises)
+        console.log(attrici);
+        
+        return attrici
+    } catch (errore) {
+         if (errore instanceof Error) {
+      console.error(`Errore durante il recupero dei dati`, errore.message)
+      
+    } else {
+      console.error('errore sconosciuto:', errore)
+    }
+    return []
+    }
+}
+
+getActresses([4, 6, 7, 8])
